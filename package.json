@@ -1,0 +1,29 @@
+{
+  "name": "game-pokemon-minimax",
+  "version": "1.0.0",
+  "description": "Jogo para a disciplina Sistemas inteligentes, mistura de pokemon e lol e com algotitmo de minimax",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardbertozzo/GamePokemonMiniMax.git"
+  },
+  "keywords": [
+    "game",
+    "minimax"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richardbertozzo/GamePokemonMiniMax/issues"
+  },
+  "homepage": "https://github.com/richardbertozzo/GamePokemonMiniMax#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
+    "bootstrap": "^3.3.6",
+    "lodash": "^4.17.5"
+  }
+}
