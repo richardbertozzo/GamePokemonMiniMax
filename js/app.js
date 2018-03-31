@@ -1,12 +1,12 @@
 angular.module('GamePokemon', [])
     .controller('GameController', function ($scope) {
 
-        function init() {
+        $scope.init = function () {
             $scope.meusPokemons = [];
             $scope.oponentePokemons = [];
             instanciarPokemons();
             definirJogadorInicial();
-        }
+        };
 
         function definirJogadorInicial() {
             $scope.suaVez = Math.random() >= 0.5;
@@ -77,7 +77,7 @@ angular.module('GamePokemon', [])
             trocarVezJogador();
             verificarVencedor();
         }
-        
+
         function setarJogadaPokemon(pokemons, pokemonEscolhido) {
             pokemonEscolhido.escolhido = true;
             pokemons.push(pokemonEscolhido);
@@ -85,8 +85,8 @@ angular.module('GamePokemon', [])
 
         function verificarVencedor() {
             if ($scope.meusPokemons.length === 3 && $scope.oponentePokemons.length === 3) {
-                var forcaMeusPokemons = getForcaPokemons($scope.meusPokemons);
-                var forcaOponentePokemons = getForcaPokemons($scope.oponentePokemons);
+                var forcaMeusPokemons = getForcaPokemons($scope.meusPokemons, $scope.oponentePokemons);
+                var forcaOponentePokemons = getForcaPokemons($scope.oponentePokemons, $scope.meusPokemons);
 
                 if (forcaMeusPokemons > forcaOponentePokemons) {
                     $scope.mensagem = "Você ganhou";
@@ -98,12 +98,26 @@ angular.module('GamePokemon', [])
             }
         }
 
-        function getForcaPokemons(pokemons) {
+        function getForcaPokemons(pokemons, pokemonsAdversario) {
             var forcaTotal = 0;
+
             pokemons.forEach(function (pokemon) {
                 forcaTotal += pokemon.forca;
+                forcaTotal += getForcaPokemonComVantagem(pokemon, pokemonsAdversario);
             });
+
             return forcaTotal
+        }
+
+        function getForcaPokemonComVantagem(pokemon, pokemonsContra) {
+            var forcaVantagem = 0;
+            pokemonsContra.forEach(function (pokemonContra) {
+                if (pokemon.vantagens.includes(pokemonContra.id)) {
+                    forcaVantagem += 4;
+                }
+            });
+
+            return forcaVantagem;
         }
 
         $scope.escolher = function (pokemon) {
@@ -120,6 +134,6 @@ angular.module('GamePokemon', [])
             }
         };
 
-        init();
+        $scope.init();
 
     });
