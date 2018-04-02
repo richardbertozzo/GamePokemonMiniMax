@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="GamePokemon" xmlns:h1="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Pokemon - minimax</title>
+
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../js/app.js"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body ng-controller="GameMiniMaxController">
+
+<div class="container">
+
+    <div class="row text-center">
+        <h2><b>Jogo de pokemons: você contra a maquina</b></h2>
+        <h4>É definido aleatoriamente quem começa, e cada jogador tem 3 escolhas. Juntando os 3 Pokemons quem formar
+            mais forças e vantagem ganha!</h4>
+        <h4>Cada Pokemon tem seu tipo, força e vantagens.</h4>
+        <button ng-click="init()" type="button" class="btn btn-default">Restart</button>
+        <hr>
+    </div>
+
+    <div class="row text-center">
+        <h3>Mensagens:</h3>
+        <h3>{{mensagem}}</h3>
+        <hr>
+    </div>
+
+    <!--Parte das escolhas-->
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="text-center"> Você: </h1>
+            <div class="row text-center">
+
+                <div ng-repeat="pokemon in meusPokemons">
+                    <div class="col-md-4 quadro-pokemon">
+                        <img src="{{pokemon.imagem}}" class="img-responsive img-rounded"
+                             alt="Responsive image">
+                        <h5>Tipo: {{pokemon.tipo}} - Força: {{pokemon.forca}}</h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="text-center"> Oponente: </h1>
+            <div class="row text-center">
+
+                <div ng-repeat="pokemon in oponentePokemons">
+                    <div class="col-md-4 quadro-pokemon">
+                        <img src="{{pokemon.imagem}}" class="img-responsive img-rounded"
+                             alt="Responsive image">
+                        <h5>Tipo: {{pokemon.tipo}} - Força: {{pokemon.forca}}</h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--quadro com os personagens-->
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 quadro-jogo">
+            <div ng-repeat="pokemon in pokemons">
+                <div class="col-md-4 quadro-pokemon" ng-class="{'text-danger': pokemon.escolhido}">
+                    <img ng-click="escolher(pokemon)" src="{{pokemon.imagem}}"
+                         class="img-responsive img-rounded">
+                    <h5>Tipo: {{pokemon.tipo}} - Força: {{pokemon.forca}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
